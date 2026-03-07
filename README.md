@@ -1,73 +1,74 @@
-# React + TypeScript + Vite
+# Dog Viewer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React app to browse random dog images, view them in detail, and save your favorites.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- npm or yarn
 
-## React Compiler
+## Installation
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Clone or download the repository:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone <repository-url>
+cd dog-viewer
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Install dependencies:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+## Running the Project
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+The app will open at [http://localhost:5173](http://localhost:5173)
+
+## Features
+
+- **Random Dog Display**: Shows a featured random dog image with its breed
+- **Thumbnail Gallery**: Displays 10 random dog thumbnails in a responsive grid
+- **Click to View**: Click any thumbnail to see it as the main image
+- **Hover Effects**: Thumbnails smoothly scale up on hover
+- **Favorites Panel**: Save your favorite dogs to a sidebar list
+- **Remove Favorites**: Easily remove dogs from your favorites
+
+## Project Structure
+
+```
+src/
+├── App.tsx                 # Main component with all state logic
+├── main.tsx                # Entry point
+├── components/
+│   ├── MainDog.tsx         # Featured dog display
+│   ├── DogThumbnail.tsx    # Thumbnail card component
+│   └── FavoritesPanel.tsx  # Favorites sidebar
+├── services/
+│   └── dogsApi.ts          # API calls to dog.ceo
+├── types/
+│   └── dog.ts              # TypeScript types
+└── styles/
+    └── globals.css         # All styling
+```
+
+## API
+
+This app uses the free [Dog CEO API](https://dog.ceo/dog-api/):
+
+- `GET /api/breeds/image/random` - Get a random dog image
+- `GET /api/breeds/image/random/{count}` - Get multiple random dog images
+
+## Tech Stack
+
+- React 18
+- TypeScript
+- Vite
+- CSS3 (Grid, Flexbox, Transitions)
