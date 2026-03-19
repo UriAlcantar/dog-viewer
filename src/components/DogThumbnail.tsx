@@ -15,6 +15,8 @@ export function DogThumbnail({ dog, onClick }: DogThumbnailProps) {
           className="thumbnail__image"
         />
       </div>
+      {dog.isFavorite && 
+              <span className="favorites-panel__favorite-btn">♥ Favorited</span>}
       <p className="thumbnail__breed">{dog.breed}</p>
     </div>
   )

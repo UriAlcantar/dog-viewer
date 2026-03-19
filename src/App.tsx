@@ -11,6 +11,8 @@ function App() {
   
   const [ mainDog, setMainDog ] = useState<Dog | null>(null);
   const [ thumbnailDogs, setThumbnailDogs ] = useState<Dog[]>([])
+  const [ allDogs, setAllDogs ] = useState<Dog[]>([])
+  const [ search, setSearch ] = useState('')
   const [ favorites, setFavorites ] = useState<Dog[]>([])
   const [ loading, setLoading ] = useState(true)
   const [ error, setError ] = useState<string | null>(null)
@@ -28,8 +30,9 @@ function App() {
       ])
       console.log(main);
       console.log(thumbnails);
-      setMainDog(main)
+      setMainDogInitial(thumbnails[0])
       setThumbnailDogs(thumbnails)
+      setAllDogs(thumbnails)
     } catch (err) {
       console.log(err)
       setError('Failed to load dogs')
@@ -41,6 +44,17 @@ function App() {
   }, [])
 
 
+  const filterDogs = (query: string) => {
+    if (query.length === 0) {
+      setThumbnailDogs(allDogs)
+    } else {
+      setThumbnailDogs(allDogs.filter(dog => dog.breed.toLowerCase().includes(query.toLowerCase())))
+    }
+  }
+
+  const setMainDogInitial = (dog: Dog) => {
+    setMainDog(dog)
+  }
   const selectDog = (dog: Dog) => {
     setMainDog(dog)
   }
@@ -94,6 +108,10 @@ function App() {
         />
 
         <div className="thumbnails">
+          <div className="thumbnails__container">
+            <input type="text" placeholder="Search for a dog" value={search} onChange={(e) => setSearch(e.target.value)}/>
+            <button onClick={() => filterDogs(search)}>Search</button>
+          </div>
           {thumbnailDogs.map(dog => (
             <DogThumbnail
               key={dog.id} 

@@ -34,8 +34,8 @@ export async function getMainDog(): Promise<Dog> {
     }
 }
 
-export async function getAllDogs(): Promise<Dog[]> {
-    const response = await fetch(`${BASE_URL}/breeds/image/random/10`);
+export async function getAllDogs(count: number = 20): Promise<Dog[]> {
+    const response = await fetch(`${BASE_URL}/breeds/image/random/${count}`);
     const data = await response.json();
     
     return data.message.map((url: string) => ({

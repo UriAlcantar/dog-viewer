@@ -26,7 +26,9 @@ export function Favorites({ favorites, onSelect, onRemove }: FavoritesPanelProps
                   className="favorites-panel__image"
                 />
                 <span className="favorites-panel__breed">{dog.breed}</span>
+                
               </div>
+              
               <button 
                 className="favorites-panel__remove-btn"
                 onClick={(e) => {
